@@ -1,0 +1,18 @@
+{
+  "author": "hackny team <david.daniel.trejo@gmail.com>",
+  "name": "downsound",
+  "description": "Download free mp3s from top artists.",
+  "version": "0.0.1",
+  "homepage": "downsound.jit.su",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DTrejo/down-sound.git"
+  },
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
