@@ -74,7 +74,7 @@
   <h1 class=logo>Down Sound</h1>
   <div class="container">
 
-    <div id="song">
+    <div id="song" style="font-size: 35px;"><br>
       </div>
     <div id="chart"></div>
     
@@ -95,11 +95,10 @@
   <script>
   
   var poop = function(i){
-    $("#song").html(alldata[i].title || alldata[i].artist)
+    $("#song").html(alldata[i].artist + " - " + alldata[i].title || alldata[i].artist)
   }
   
   var download = function(i){
-    console.log('grr')
     window.open(alldata[i].link);
   }
   
@@ -107,8 +106,8 @@
        m = 64, // number of samples per layer
        data = d3.layout.stack()(stream_layers(n, m, .1)),
        color = d3.interpolateRgb("#aad", "#556");
-  var i= 0
-  var j = 0
+  var ww = 0
+  var jj = 0
    var p = 20,
        w = 960,
        h = 500 - .5 - p,
@@ -127,8 +126,8 @@
        y0 = function(d) { return h - d.y0 * h / my; },
        y1 = function(d) { return h - (d.y + d.y0) * h / my; },
        y2 = function(d) { return d.y * h / mz; }; // or `my` to not rescale
-       i1 = function(d){ return i++}
-       i2 = function(d){ return j++}
+       i1 = function(d){ return ww++}
+       i2 = function(d){ return jj++}
        hover = function(d){ return "poop(" + i1() + ")"}
        click = function(d){ return "download(" + i2() + ")"}
        
@@ -232,13 +231,15 @@
   alldata = []
   url = $(location).attr('href')
   page = url + ".json"
-  $.getJSON("/90s.json", function(data) {
+  qq = 0
+  $.getJSON(page, function(data) {
     
     data.sort(function(a, b) {
       return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
     });
-    data.forEach(function(song, i) {
-     alldata[i] = data[i]
+    data.forEach(function(song, qq) {
+      console.log(song)
+     alldata[qq] = song
     })
   });
   
@@ -255,7 +256,7 @@
         //   a[i] += alldata[i].nominal;
         // }  
     }
-    return d3.range(4).map(function() {
+    return d3.range(1).map(function() {
         var a = [], i;
         for (i = 0; i < m; i++) a[i] = i;
         bump(a);
