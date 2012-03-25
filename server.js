@@ -14,12 +14,11 @@ app.route('/results.json').json(songs)
 
 var categories = _.unique(match('.category', songs))
 // console.log(categories);
-
 // var cat2count = {};
 
 categories.forEach(function(catname) {
-  var route = '/' + catname + '.json'
-  var uiroute = '/' + encodeURIComponent(catname)//.replace(/ /gi, '-');
+  var route = '/' + catname.replace(' ', '-') + '.json'
+  var uiroute = '/' + catname.replace(' ', '-');
   var json = songs.filter(function(s) {
     return s.category === catname
   }).sort(function(a, b) {

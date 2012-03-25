@@ -15,8 +15,8 @@
 // }
 
 $(document).ready(function(){
-  var url = location.pathname + '.json'
-  console.log(url)
+  var url = location.pathname.replace(' ', '-') + '.json'
+  console.log(url);
   $.getJSON(url, function(data) {
     var container = $('#download-links')
     var template = $('#download-links .template')

@@ -2,7 +2,7 @@
   "author": "hackny team <david.daniel.trejo@gmail.com>",
   "name": "downsound",
   "description": "Download free mp3s from top artists.",
-  "version": "0.0.1-7",
+  "version": "0.0.1-8",
   "homepage": "downsound.jit.su",
   "repository": {
     "type": "git",
