@@ -39,7 +39,7 @@ $(document).ready(function(){
   
   $('button').first().click(function(event){
     var links = [];
-    $('#download-links a').slice(0,5).each(function(i, el) {
+    $('#download-links a').each(function(i, el) {
       var url = $(el).attr('href');
       links.push(url);
     });
