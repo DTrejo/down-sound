@@ -3,11 +3,14 @@ var request = require('request')
   , SEARCH = BASE + 'artists/search.json?q='
   , RANK = BASE + 'artists/rank/'
 
-// module.exports = rate
+module.exports = {
+  search: search
+, rank: rank
+}
 
 // returns first key and the value stored there in an object
 function firstKey(o) {
-  for (var k in o) break;
+  for (var k in o) break
   return k
 }
 
@@ -43,10 +46,10 @@ function constructRankUrl(ids, type) {
 }
 
 // get rankings of an artist
-function rank(ids, cb) {
+function rank(ids, type, cb) {
   if (typeof ids === 'string') ids = [ ids ]
   
-  var url = constructRankUrl(ids);
+  var url = constructRankUrl(ids, type);
   request(url, function(err, res, body) {
     if (err) return cb(new Error(err.message))
 
@@ -58,7 +61,6 @@ function rank(ids, cb) {
 function view(artist, cb) {
   var options = {};
   request(options, function(err, res, body) {
-
     cb(new Error('not implemented'))
   });
 }
@@ -66,13 +68,13 @@ function view(artist, cb) {
 if (require.main === module) {
   var ARTIST = 'childish gambino'
   var ID = '303567'
-  // searchPickFirst(artist, function(err, id, info) {
-  //   console.log(id)
-  //   console.log(info)
-  // })
-  
-  rank(ID, function(err, r) {
-    console.log(r);
+  searchPickFirst(ARTIST, function(err, id, info) {
+    console.log(id)
+    console.log(info)
+    console.log('===');
+    
+    rank(ID, 'nominal', function(err, r) {
+      console.log(r);
+    })
   })
-
 }
