@@ -4,11 +4,23 @@ var tako = require('tako')
   , app = tako()
   , PORT = 8000
   , PUBLIC = path.join(__dirname, 'public')
+  , _ = underscore = require('underscore')
+  , match = require('JSONSelect').match
   ;
 
-
 // the OH GOD this is such a fat JSON blob URL.
-app.route('/results.json').json(require('./results.json'))
+var songs = require('./results3.json');
+app.route('/results.json').json(songs)
+
+var categories = _.unique(match('.category', songs))
+
+categories.forEach(function(catname) {
+  var route = '/' + catname + '.json'
+  var json = match('.category:val("'+catname+'")', songs)
+  console.log('auto-route', 'http://localhost:8000'+route, json.length);
+  app.route(route).json(json)
+})
+
 
 // only after the other routes are done, should you fuggin serve static shit.
 app.route('/*').files(PUBLIC)
@@ -18,17 +30,8 @@ app.route('/').file(path.join(PUBLIC, 'index.html'))
 // app.route('/proxypass', function (req, resp) {
 //   req.pipe(request("http://otherserver.com"+req.url)).pipe(resp)
 // })
-
 // app.route('/hello.json').json({msg:'hello!'})
 // app.route('/plaintext').text('I like text/plain')
-
-// Ported example from socket.io docs to show integration
-// app.sockets.on('connection', function (socket) {
-//   app.sockets.emit('news', { will: 'be received by everyone'});
-//   socket.on('disconnect', function () {
-//     app.sockets.emit('user disconnected')
-//   })
-// })
 
 app.httpServer.listen(PORT)
 console.log('node ' + process.version
