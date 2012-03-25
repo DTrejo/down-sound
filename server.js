@@ -27,6 +27,12 @@ categories.forEach(function(catname) {
 
 // only after the other routes are done, should you fuggin serve static shit.
 app.route('/*').files(PUBLIC)
+
+// so ghetttoooo
+app.route('/js').files(path.join(PUBLIC, 'js'))
+app.route('/css').files(path.join(PUBLIC, 'css'))
+app.route('/images').files(path.join(PUBLIC, 'images'))
+
 // whoops, tako doesn't support index.html!
 app.route('/').file(path.join(PUBLIC, 'index.html'))
 
