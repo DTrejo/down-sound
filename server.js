@@ -13,14 +13,20 @@ var songs = require('./results3.json');
 app.route('/results.json').json(songs)
 
 var categories = _.unique(match('.category', songs))
+// console.log(categories);
 categories.forEach(function(catname) {
   var route = '/' + catname + '.json'
+  var uiroute = '/' + encodeURIComponent(catname)//.replace(/ /gi, '-');
   var json = songs.filter(function(s) {
     return s.category === catname
-  });
+  }).sort(function(a, b) {
+    return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10)
+  })
 
-  console.log('auto-route', 'http://localhost:8000'+route, json.length);
+  console.log('routes', 'http://localhost:8000'+uiroute
+    , 'http://localhost:8000'+route, json.length);
   app.route(route).json(json)
+  app.route(uiroute).file('./public/linkopener.html')
 })
 
 
