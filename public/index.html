@@ -33,15 +33,6 @@
     background-color: #fff;
     font-family: "Magra", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
   }
-    .col3 {
-      width: 100%;
-      overflow: hidden;
-    }
-      .col3 > div {
-        width: 30%;
-        display: inline-block;
-        border: 1px solid #999;
-      }
   .categories {
     padding-top: 0em;
     margin-top: 0em;
@@ -49,6 +40,15 @@
     .categories li {
       margin-top: .75em;
     }
+/*    .col3 {*/
+/*      width: 100%;*/
+/*      overflow: hidden;*/
+/*    }*/
+/*      .col3 > div {*/
+/*        width: 30%;*/
+/*        display: inline-block;*/
+/*        border: 1px solid #999;*/
+/*      }*/
   .template { display: none; }
 
 </style>
@@ -78,7 +78,7 @@
   _.each(categories, function(numtracks, catname) {
     var url = '/'+encodeURIComponent(catname)
     var t = template.clone()
-    t.find('.catname').text(catname)
+    t.find('.catname').text(catname[0].toUpperCase() + catname.substr(1))
     t.find('.numtracks').text(numtracks)
     t.find('a').attr('href', url)
     container.append(t)
