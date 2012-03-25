@@ -45,7 +45,28 @@
   <script src="/js/linkopener.js" type="text/javascript"></script>
 
   <script>
+
+  alldata = []
+  url = $(location).attr('href')
+  page = url + ".json"
+  qq = 0
   
+  $.ajax({
+    url: page,
+    data: data,
+    async: false,
+    success: function(data){
+      data.sort(function(a, b) {
+        return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
+      });
+      data.forEach(function(song, qq) {
+        if(qq < 64){
+          alldata[qq] = song
+        }
+      })
+    }
+  });
+    
   var down = function(i){
     index = 63 - i
     $("#song").html(alldata[index].artist + " - " + alldata[index].title || alldata[index].artist)
@@ -59,15 +80,12 @@
     p = $("#"+i)
     p.css("fill", "#aaaadd");
   }
-  
-  var download = function(i){
-    // window.open(alldata[i].link);
-  }
-  
+    
    var n = 4, // number of layers
        m = 64, // number of samples per layer
        data = d3.layout.stack()(stream_layers(n, m, .1)),
        color = d3.interpolateRgb("#aad", "#556");
+  console.log(data)
   var ww = 0
   var jj = 0
   var ee = 0
@@ -195,34 +213,17 @@
            .attr("width", x({x: .9}));
      }
    }
-
-  
-  alldata = []
-  url = $(location).attr('href')
-  page = url + ".json"
-  qq = 0
-  $.getJSON(page, function(data) {
-    
-    data.sort(function(a, b) {
-      return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
-    });
-    data.forEach(function(song, qq) {
-      if(qq < 64){
-        alldata[qq] = song
-      }
-    })
-  });
   
   function stream_layers(n, m, o) {
     if (arguments.length < 3) o = 0;
     function bump(a) {
-        // for (var i = 0; i < m; i++) {
-        //   a[i] += alldata[i].nominal;
-        // }  
+      console.log(alldata)
+        for (var i = 0; i < m; i++) {
+          a[i] = alldata[63 - i].nominal;
+        }  
     }
     return d3.range(1).map(function() {
         var a = [], i;
-        for (i = 0; i < m; i++) a[i] = i;
         bump(a);
         return a.map(stream_index);
       });
