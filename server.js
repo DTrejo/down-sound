@@ -16,7 +16,10 @@ var categories = _.unique(match('.category', songs))
 
 categories.forEach(function(catname) {
   var route = '/' + catname + '.json'
-  var json = match('.category:val("'+catname+'")', songs)
+  var json = songs.filter(function(s) {
+    return s.category === catname
+  });
+
   console.log('auto-route', 'http://localhost:8000'+route, json.length);
   app.route(route).json(json)
 })

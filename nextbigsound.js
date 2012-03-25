@@ -23,7 +23,7 @@ function search(artist, cb) {
 }
 
 // the data args called back with looks like this:
-// callback(err, '303567', { 
+// callback(err, '303567', {
 //    name: 'Childish Gambino',
 //    music_brainz_id: '7fb57fba-a6ef-44c2-abab-2fa3bdee607e',
 //    stars: '18'
@@ -34,7 +34,7 @@ function searchPickFirst(artist, cb) {
     if (err) return cb(new Error(err.message));
     var id = firstKey(data)
     var info = data[id];
-    
+
     return cb(null, id, info)
   })
 }
@@ -48,7 +48,7 @@ function constructRankUrl(ids, type) {
 // get rankings of an artist
 function rank(ids, type, cb) {
   if (typeof ids === 'string') ids = [ ids ]
-  
+
   var url = constructRankUrl(ids, type);
   request(url, function(err, res, body) {
     if (err) return cb(new Error(err.message))
@@ -72,7 +72,7 @@ if (require.main === module) {
     console.log(id)
     console.log(info)
     console.log('===');
-    
+
     rank(ID, 'nominal', function(err, r) {
       console.log(r);
     })

@@ -38,7 +38,7 @@ function insertAndWrite(err, results) {
 
       // if no data was fetched for it, ignore.
       if (!results[lastfmName]) return
-      
+
       var id, nbsResult
       // we put in empty stats in this case.
       if (results[lastfmName].status === 'error') {
@@ -50,7 +50,7 @@ function insertAndWrite(err, results) {
         id = firstKey(results[lastfmName])
         nbsResult = results[lastfmName][id]
       }
-    
+
       if (id) song.artistId = id
       song = _.extend(song, nbsResult)
 
