@@ -1,18 +1,18 @@
-var count = 0;
-var links = new Array();
-
-function addToLinks() {
-  $('my-new-list').each(function(){
-    links.push($(this).attr('href'));
-  });
-}
-
-function useMyArray() {
-  console.log('hi', links.length);
-  for (i=0; i < links.length; i++) {
-    window.open(links[i]);
-  }
-}
+// var count = 0;
+// var links = new Array();
+// 
+// function addToLinks() {
+//   $('my-new-list').each(function(){
+//     links.push($(this).attr('href'));
+//   });
+// }
+// 
+// function useMyArray() {
+//   console.log('hi', links.length);
+//   for (i=0; i < links.length; i++) {
+//     window.open(links[i]);
+//   }
+// }
 
 $(document).ready(function(){
   $.getJSON('/electronic.json', function(data) {
@@ -25,7 +25,6 @@ $(document).ready(function(){
     data.forEach(function(song, i) {
       var item = template.clone();
       item.removeClass('template');
-      console.log(item.find('a'));
       item.find('a').attr('href', song.link);
       item.find('a')
         .text(
@@ -34,10 +33,19 @@ $(document).ready(function(){
           + ' — ' + song.title);
       container.append(item);
     });
+    template.remove();
     
   });
   
   $('button').first().click(function(event){
-    useMyArray();
+    var links = [];
+    $('#download-links a').slice(0,5).each(function(i, el) {
+      var url = $(el).attr('href');
+      links.push(url);
+    });
+
+    links.forEach(function(link) {
+      window.open(link);
+    });
   });
 });
