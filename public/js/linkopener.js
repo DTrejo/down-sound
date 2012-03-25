@@ -15,27 +15,6 @@
 // }
 
 $(document).ready(function(){
-  $.getJSON('/electronic.json', function(data) {
-    
-    var container = $('#download-links');
-    var template = $('#download-links .template');
-    data.sort(function(a, b) {
-      return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
-    });
-    data.forEach(function(song, i) {
-      var item = template.clone();
-      item.removeClass('template');
-      item.find('a').attr('href', song.link);
-      item.find('a')
-        .text(
-          (song.nominal || '')
-          +' '+(song.name || song.artist) 
-          + ' — ' + song.title);
-      container.append(item);
-    });
-    template.remove();
-    
-  });
   
   $('button').first().click(function(event){
     var links = [];
