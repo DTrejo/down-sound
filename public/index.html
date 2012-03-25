@@ -10,6 +10,8 @@
   body, html {
     padding: 0;
     margin: 0;
+    font-size: 125%;
+    background: #fff url('/images/snow.png');
   }
   .logo {
     background: red url('/images/down-sound_logo1.png');
@@ -18,36 +20,66 @@
     margin: 0;
     padding: 0;
   }
-  .col3 {
-    width: 100%;
-    overflow: hidden;
+  .container {
+    width: 36em;
+    padding: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border: 9px solid #cd1c2d;
+    border-top: none;
+    margin: 0 auto;
+    background-color: #fff;
   }
-    .col3 > div {
-      width: 30%;
-      float: left;
-      border: 1px solid #999;
-      padding-left: 2em;
+    .col3 {
+      width: 100%;
+      overflow: hidden;
     }
+      .col3 > div {
+        width: 30%;
+        display: inline-block;
+        border: 1px solid #999;
+/*        padding-left: 2em;*/
+      }
+  .categories {
+    padding-top: 0em;
+    margin-top: 0em;
+  }
+  .template { display: none; }
 
 </style>
 </head>
 
 <body>
   <h1 class=logo>Down Sound</h1>
-  <div class="col3">
-    <div>
-      <p>stuff</p>
-    </div>
-
-    <div>
-      <p>stuff</p>
-    </div>
-
-    <div>
-      <p>stuff</p>
-    </div>
-
+  <div class="container">
+    <ul class=categories>
+      <li class=template><a href="#"><span class=catname></span> (<span
+      class=numtracks></span> songs)</a></li>
+    </ul>    
+    
   </div>
-
+  
+  <script src="/js/jquery.js"></script>
+  <script src="/js/underscore.js"></script>
+<script>
+;$(function () {
+  
+  var categories = { 
+    acoustic: 658,ambient: 250,blues: 531,classical: 552,country: 50,electronic: 250,emo: 340,folk: 250,hardcore: 250,'hip hop': 596,indie: 246,jazz: 592,latin: 503,metal: 250,pop: 249,'pop punk': 506,punk: 250,reggae: 541,rnb: 80,rock: 250,soul: 130,world: 521,'60s': 502,'70s': 499,'80s': 514,'90s': 505 
+    }
+  
+  var container = $('.categories')
+  var template = $('.categories .template').removeClass('template')
+  _.each(categories, function(numtracks, catname) {
+    var url = '/'+encodeURIComponent(catname)
+    var t = template.clone()
+    t.find('.catname').text(catname)
+    t.find('.numtracks').text(numtracks)
+    t.find('a').attr('href', url)
+    container.append(t)
+  })
+  template.remove()
+})
+</script>
 </body>
 </html>
