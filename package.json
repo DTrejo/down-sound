@@ -10,7 +10,8 @@
   },
   "main": "server.js",
   "dependencies": {
-    "request": "~2.9.153"
+    "request": "~2.9.153",
+    "tako": "0.2.2"
   },
   "devDependencies": {},
   "optionalDependencies": {},
