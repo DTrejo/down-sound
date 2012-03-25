@@ -9,7 +9,10 @@
     "url": "git@github.com:DTrejo/down-sound.git"
   },
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "request": "~2.9.153",
+    "tako": "0.2.2"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
