@@ -13,7 +13,6 @@ var songs = require('./results3.json');
 app.route('/results.json').json(songs)
 
 var categories = _.unique(match('.category', songs))
-
 categories.forEach(function(catname) {
   var route = '/' + catname + '.json'
   var json = songs.filter(function(s) {
