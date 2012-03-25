@@ -28,9 +28,9 @@
     font-family: "Magra", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
     margin: 0 auto;
     min-height: 800px;
+    padding: 3em;
     padding-bottom: 2em;
     padding-top: 2em;
-    padding: 3em;
     width: 36em;
   }
   .categories {
