@@ -35,7 +35,8 @@
   <script>
   
   var poop = function(i){
-    $("#song").html(alldata[i].artist + " - " + alldata[i].title || alldata[i].artist)
+    index = 63 - i
+    $("#song").html(alldata[index].artist + " - " + alldata[index].title || alldata[index].artist)
   }
   
   var download = function(i){
@@ -178,11 +179,12 @@
       return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
     });
     data.forEach(function(song, qq) {
-      console.log(song)
-     alldata[qq] = song
+      if(qq < 64){
+        alldata[qq] = song
+      }
     })
   });
-  
+
   var bars = $(".bar")
   for(i = 0; i < bars.length; i++){
     // console.log(bars[i])
