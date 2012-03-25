@@ -6,79 +6,19 @@
 <title>Down Sound</title>
 <script type="text/javascript" src='js/d3.js'></script>
 <link rel="stylesheet" href="/css/aristo.css" charset="utf-8">
-<style>
-  @import url(http://fonts.googleapis.com/css?family=Magra:400,700);
-  body, html {
-    padding: 0;
-    margin: 0;
-    font-size: 125%;
-    background: #fff url('/images/snow.png');
-  }
-  .logo {
-    background: red url('/images/down-sound_logo1.png');
-    text-indent: -9999em;
-    height: 170px;
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    width: 36em;
-    padding: 3em;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    border: 9px solid #cd1c2d;
-    border-top: none;
-    border-bottom: none;
-    margin: 0 auto;
-    background-color: #fff;
-    font-family: "Magra", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
-    min-height: 800px;
-  }
-  .categories {
-    padding-top: 0em;
-    margin-top: 0em;
-  }
-    .categories li {
-      margin-top: .75em;
-    }
-/*    .col3 {*/
-/*      width: 100%;*/
-/*      overflow: hidden;*/
-/*    }*/
-/*      .col3 > div {*/
-/*        width: 30%;*/
-/*        display: inline-block;*/
-/*        border: 1px solid #999;*/
-/*      }*/
-  .template { display: none; }
-
-  #download-links {
-    list-style: none;
-  }
-  .image {
-    margin-right: 5px;
-  }
-  .t180 {
-    display: block;
-    float: left;
-       -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-         -o-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-            transform: rotate(180deg);
-  }
-</style>
+<link rel="stylesheet" href="/css/style.css" charset="utf-8">
 </head>
 
 <body>
-  <h1 class=logo>Down Sound</h1>
+  <h1><a href="/" class=logo>Down Sound</a></h1>
   <div class="container">
 
     <div id="song" style="font-size: 35px;"><br>
       </div>
     <div id="chart"></div>
     
-    <button class="awesome green"><span class="t180"> ⇧</span> download ALL the mp3s! </button>
+    <button class="awesome green big"><span class="t180"> ⇧</span> download ALL
+    the mp3s! </button>
     <ul id="download-links">
       <li class="template"><img class="image" width="32"
       src="http://userserve-ak.last.fm/serve/64s/45657461.jpg"><a
