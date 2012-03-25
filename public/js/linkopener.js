@@ -2,8 +2,8 @@ var count = 0;
 var links = new Array();
 
 function addToLinks() {
-  $("my-new-list").each(function(){
-    links.push($(this).attr("href"));
+  $('my-new-list').each(function(){
+    links.push($(this).attr('href'));
   });
 }
 
@@ -14,49 +14,30 @@ function useMyArray() {
   }
 }
 
-// $(document).ready(function(){
-//   addToLinks();
-// 
-//   $("button").first().click(function(event){
-//     useMyArray();
-//   });
-//   
-//   $.getJSON('/60s.json', function(data) {
-//     console.log (data);
-//     // var items = [];
-//     // 
-//     $.each(data, function(key, val) {
-//       items.push('<li id="' + key + '">' + val + '</li>');
-//     });
-//     
-//     $('<ul/>', {
-//        'class': 'my-new-list',
-//        html: links.join('')
-//      }).appendTo('body');
-//   });
-// });
-
 $(document).ready(function(){
-  $.getJSON('/60s.json', function(data) {
-    console.log(data);
+  $.getJSON('/electronic.json', function(data) {
     
     var container = $('#download-links');
     var template = $('#download-links .template');
+    data.sort(function(a, b) {
+      return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
+    });
     data.forEach(function(song, i) {
       var item = template.clone();
       item.removeClass('template');
       console.log(item.find('a'));
-      item.find('a').attr("href", song.link)
+      item.find('a').attr('href', song.link);
+      item.find('a')
+        .text(
+          (song.nominal || '')
+          +' '+(song.name || song.artist) 
+          + ' — ' + song.title);
       container.append(item);
-      
-      // inside of song
-      console.log(song.link);
     });
     
   });
   
-  
-  $("button").first().click(function(event){
+  $('button').first().click(function(event){
     useMyArray();
   });
 });
