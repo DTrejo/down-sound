@@ -14,21 +14,25 @@ app.route('/results.json').json(songs)
 
 var categories = _.unique(match('.category', songs))
 // console.log(categories);
+// var cat2count = {};
+
 categories.forEach(function(catname) {
-  var route = '/' + catname + '.json'
-  var uiroute = '/' + encodeURIComponent(catname)//.replace(/ /gi, '-');
+  var route = '/' + catname.replace(' ', '-') + '.json'
+  var uiroute = '/' + catname.replace(' ', '-');
   var json = songs.filter(function(s) {
     return s.category === catname
   }).sort(function(a, b) {
     return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10)
   })
+  
+  // cat2count[catname] = json.length;
 
   console.log('routes', 'http://localhost:8000'+uiroute
     , 'http://localhost:8000'+route, json.length);
   app.route(route).json(json)
   app.route(uiroute).file('./public/linkopener.html')
 })
-
+// console.log(cat2count);
 
 // only after the other routes are done, should you fuggin serve static shit.
 app.route('/*').files(PUBLIC)
