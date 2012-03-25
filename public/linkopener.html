@@ -34,13 +34,22 @@
 
   <script>
   
-  var poop = function(i){
+  var down = function(i){
     index = 63 - i
     $("#song").html(alldata[index].artist + " - " + alldata[index].title || alldata[index].artist)
+    p = $("#"+i)
+    p.css("fill", "#000000");
+  }
+  
+  var up = function(i){
+    index = 63 - i
+    $("#song").html(alldata[index].artist + " - " + alldata[index].title || alldata[index].artist)
+    p = $("#"+i)
+    p.css("fill", "#aaaadd");
   }
   
   var download = function(i){
-    window.open(alldata[i].link);
+    // window.open(alldata[i].link);
   }
   
    var n = 4, // number of layers
@@ -49,6 +58,8 @@
        color = d3.interpolateRgb("#aad", "#556");
   var ww = 0
   var jj = 0
+  var ee = 0
+  var rr = 0
    var p = 20,
        w = 960,
        h = 500 - .5 - p,
@@ -69,7 +80,10 @@
        y2 = function(d) { return d.y * h / mz; }; // or `my` to not rescale
        i1 = function(d){ return ww++}
        i2 = function(d){ return jj++}
-       hover = function(d){ return "poop(" + i1() + ")"}
+       i3 = function(d){ return ee++}
+       i4 = function(d){ return rr++}
+       mousedown = function(d){ return "down(" + i1() + ")"}
+       mouseup = function(d){ return "up(" + i4() + ")"}
        click = function(d){ return "download(" + i2() + ")"}
        
    var vis = d3.select("#chart")
@@ -87,13 +101,15 @@
        .data(function(d) { return d; })       
      .enter().append("g")
        .attr("class", "bar")
+       .attr("id", i3)
        .attr("transform", function(d) { return "translate(" + x(d) + ",0)"; });
    bars.append("rect")
        .attr("width", x({x: .9}))
        .attr("x", 0)
        .attr("y", h)
        .attr("height", 0)
-       .attr("onmouseover", hover)
+       .attr("onmouseover", mousedown)
+       .attr("onmouseout", mouseup)
        .attr("onmousedown", click)
      .transition()
        .delay(function(d, i) { return i * 10; })
@@ -167,7 +183,7 @@
            .attr("width", x({x: .9}));
      }
    }
-  /* Inspired by Lee Byron's test data generator. */
+
   
   alldata = []
   url = $(location).attr('href')
@@ -184,13 +200,7 @@
       }
     })
   });
-
-  var bars = $(".bar")
-  for(i = 0; i < bars.length; i++){
-    // console.log(bars[i])
-  }
   
-  // console.log(alldata)
   function stream_layers(n, m, o) {
     if (arguments.length < 3) o = 0;
     function bump(a) {
