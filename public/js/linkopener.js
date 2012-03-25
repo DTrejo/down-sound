@@ -15,37 +15,40 @@
 // }
 
 $(document).ready(function(){
-  $.getJSON('/electronic.json', function(data) {
-    
-    var container = $('#download-links');
-    var template = $('#download-links .template');
+  var url = location.pathname + '.json'
+  console.log(url)
+  $.getJSON(url, function(data) {
+    var container = $('#download-links')
+    var template = $('#download-links .template')
     data.sort(function(a, b) {
-      return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10);
+      return parseInt(b.nominal || 0, 10) - parseInt(a.nominal || 0, 10)
     });
+    
     data.forEach(function(song, i) {
-      var item = template.clone();
-      item.removeClass('template');
-      item.find('a').attr('href', song.link);
+      var item = template.clone()
+      item.removeClass('template')
+      item.find('a').attr('href', song.link)
+      item.find('img').attr('src', song.image)
       item.find('a')
         .text(
           (song.nominal || '')
-          +' '+(song.name || song.artist) 
-          + ' — ' + song.title);
-      container.append(item);
+          +' '+(song.name || song.artist)
+          + ' — ' + song.title)
+      container.append(item)
     });
-    template.remove();
+    template.remove()
     
   });
   
   $('button').first().click(function(event){
-    var links = [];
+    var links = []
     $('#download-links a').each(function(i, el) {
-      var url = $(el).attr('href');
-      links.push(url);
+      var url = $(el).attr('href')
+      links.push(url)
     });
 
     links.forEach(function(link) {
-      window.open(link);
+      window.open(link)
     });
   });
 });
