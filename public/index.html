@@ -46,7 +46,8 @@
   var container = $('.categories')
   var template = $('.categories .template').removeClass('template')
   _.each(categories, function(numtracks, catname) {
-    var url = '/'+encodeURIComponent(catname)
+    catname = catname.replace(' ', '-')
+    var url = '/'+catname
     var t = template.clone()
     t.find('.catname').text(catname[0].toUpperCase() + catname.substr(1))
     t.find('.numtracks').text(numtracks)
